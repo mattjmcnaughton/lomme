@@ -1,0 +1,49 @@
+{
+  "name": "loome",
+  "version": "0.1.0",
+  "description": "A programmable practice band for improvising and comping",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": { "node": ">=22.14 <23" },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc -b",
+    "preview": "vite preview"
+  },
+  "author": "Matt McNaughton <mattjmcnaughton@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.0",
+    "react-dom": "^19.0",
+    "@tanstack/react-router": "^1.120",
+    "@tanstack/react-query": "^5.75",
+    "@tanstack/react-query-devtools": "^5.75"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9",
+    "@types/react": "^19.0",
+    "@types/react-dom": "^19.0",
+    "@vitejs/plugin-react": "^4.3",
+    "@tanstack/router-devtools": "^1.120",
+    "@tanstack/router-plugin": "^1.120",
+    "typescript": "^5.7",
+    "vite": "^6.3",
+    "vitest": "^3.0",
+    "@testing-library/react": "^16.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "jsdom": "^26.0",
+    "@playwright/test": "^1.49",
+    "msw": "^2.7",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "13.0.0",
+    "@semantic-release/exec": "7.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "11.0.1",
+    "@semantic-release/release-notes-generator": "14.0.1",
+    "semantic-release": "24.2.3",
+    "tailwindcss": "^3.4",
+    "postcss": "^8.4",
+    "autoprefixer": "^10.4"
+  }
+}

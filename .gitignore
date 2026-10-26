@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Tanstack Router
+src/routeTree.gen.ts
+
+# Testing
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+!.env.example
+
+# Playwright
+test-results/
+playwright-report/
+
+# Local context and orb artifacts
+.agentic/sources/
+.amp/in/
+.amp/portals/
+.tanstack/

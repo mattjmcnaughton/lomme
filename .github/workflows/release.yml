@@ -1,0 +1,89 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+  # Manual runs can only rehearse; they never publish or deploy.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Serialize releases and deployments; never cancel a deployment in progress.
+concurrency:
+  group: release-loome-production
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    if: >-
+      github.event_name == 'workflow_dispatch' || (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      )
+    outputs:
+      published: ${{ steps.semantic.outputs.new-release-published }}
+      version: ${{ steps.semantic.outputs.new-release-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      # semantic-release must run on main, but must not release untested commits.
+      # A newer tip will get its own CI run and release opportunity.
+      - name: Check CI tested the current main tip
+        id: candidate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          TESTED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$EVENT_NAME" = workflow_dispatch ] || [ "$(git rev-parse HEAD)" = "$TESTED_SHA" ]; then
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Main advanced beyond the tested commit; skipping this release"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.candidate.outputs.eligible == 'true'
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v4
+        if: steps.candidate.outputs.eligible == 'true'
+      - name: Install dependencies
+        if: steps.candidate.outputs.eligible == 'true'
+        run: pnpm install --frozen-lockfile
+      - name: Semantic release
+        id: semantic
+        if: steps.candidate.outputs.eligible == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = workflow_dispatch ]; then
+            pnpm exec semantic-release --dry-run
+          else
+            pnpm exec semantic-release
+          fi
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: release
+    if: needs.release.outputs.published == 'true' && github.event_name == 'workflow_run'
+    concurrency: deploy-loome-prod-mattjmcnaughton
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ needs.release.outputs.version }}
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Build tagged source and deploy to Fly
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --app loome-prod-mattjmcnaughton --remote-only --ha=false

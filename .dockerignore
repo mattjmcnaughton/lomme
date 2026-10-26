@@ -1,0 +1,13 @@
+.git
+.github
+.agentic
+.amp
+node_modules
+dist
+test-results
+playwright-report
+coverage
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
