@@ -8,7 +8,9 @@ are public build-time values: never put credentials in them.
 The app name follows Aleph's convention: `loome-prod-mattjmcnaughton` in `ewr`.
 The custom domain is `loome.mattjmcnaughton.com`; GitHub is still
 `mattjmcnaughton/lomme`. Availability of the Fly name is not yet verified.
-The initial site is only the template landing page, not the proof of concept.
+The complete practice application is migrated. The Fly deployment job is
+explicitly paused (`false && ...` in `release.yml`) until credentials and launch
+authorization are supplied. CI and GitHub releases may still run on main.
 
 ## One-time launch (operator approval required)
 
@@ -61,13 +63,16 @@ already performed. Authenticate Fly locally before starting.
 5. Enable CD only when ready to deploy qualifying merges. Generate an app-scoped
    deploy token with `flyctl tokens create deploy -a loome-prod-mattjmcnaughton`,
    then store it privately as GitHub Actions secret `FLY_API_TOKEN` in
-   `mattjmcnaughton/lomme`. Do not paste tokens into chat or source files.
+   `mattjmcnaughton/lomme`. After launch authorization, remove the explicit
+   `false &&` deployment pause from `release.yml` while keeping its existing
+   release/event conditions. Do not paste tokens into chat or source files.
 
 ## Release flow
 
 CI runs formatting, lint, project-reference typechecking, Vitest, the Chromium
-production-build browser smoke, and a Docker production-image HTTP smoke.
-There are no unit/integration tests yet; those commands report an empty suite.
+production-build browser workflows, and a Docker production-image HTTP smoke.
+Co-located tests cover domain, session, storage and playback behavior; the
+separate integration directory currently has no additional tests.
 
 Only a successful same-repository **push** CI run on **main** can publish.
 The release workflow also checks that main still equals the tested SHA, avoiding
