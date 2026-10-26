@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Loome backing track v2",
+  "description": "A complete looping 4/4 arrangement for Loome's synthesized band. Data only; no audio or code.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "name",
+    "description",
+    "chords",
+    "key",
+    "minor",
+    "bpm",
+    "drumPattern",
+    "bassMotion",
+    "keysPattern",
+    "mode",
+    "mix",
+    "master",
+    "countIn",
+    "metronome",
+    "showScale"
+  ],
+  "properties": {
+    "version": {
+      "const": 2
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "\\S"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "pattern": "\\S"
+    },
+    "chords": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "description": "One entry per bar. Dm7+G7 means two beats of each; repeat entries for longer holds.",
+      "items": {
+        "type": "string",
+        "maxLength": 40,
+        "pattern": "^[A-Ga-g][#b♯♭]?(?:6|7|9||m|maj7|m7|m6|maj9|m9|sus4|7sus4|dim|dim7|m7b5)(?:\\+[A-Ga-g][#b♯♭]?(?:6|7|9||m|maj7|m7|m6|maj9|m9|sus4|7sus4|dim|dim7|m7b5))?$"
+      }
+    },
+    "key": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 11,
+      "description": "Home key: C=0, Db=1, D=2, Eb=3, E=4, F=5, F#=6, G=7, Ab=8, A=9, Bb=10, B=11. Does not transpose the supplied chords."
+    },
+    "minor": {
+      "type": "boolean"
+    },
+    "bpm": {
+      "type": "integer",
+      "minimum": 45,
+      "maximum": 180
+    },
+    "drumPattern": {
+      "enum": [
+        "pocket",
+        "half-time",
+        "four-floor",
+        "boom-bap",
+        "funk",
+        "swing",
+        "jazz-light",
+        "bossa"
+      ]
+    },
+    "bassMotion": {
+      "enum": ["roots", "moving"]
+    },
+    "keysPattern": {
+      "enum": ["auto", "sustain", "quarters", "offbeat", "arpeggio"]
+    },
+    "mode": {
+      "enum": ["solo", "comp", "trade"],
+      "description": "solo: band accompanies you; comp: keys sit out; trade: keys alternate four bars on/four off, across loop boundaries."
+    },
+    "mix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drums", "bass", "keys"],
+      "properties": {
+        "drums": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["volume", "muted"],
+          "properties": {
+            "volume": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "muted": {
+              "type": "boolean"
+            }
+          }
+        },
+        "bass": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["volume", "muted"],
+          "properties": {
+            "volume": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "muted": {
+              "type": "boolean"
+            }
+          }
+        },
+        "keys": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["volume", "muted"],
+          "properties": {
+            "volume": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "muted": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "master": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "countIn": {
+      "type": "boolean",
+      "description": "One bar of clicks before the chart starts."
+    },
+    "metronome": {
+      "type": "boolean"
+    },
+    "showScale": {
+      "type": "boolean",
+      "description": "Show the static home-key scale on the fretboard; not per-chord scale advice."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional searchable catalog information. Labels describe the exercise, not additional audio capabilities.",
+      "properties": {
+        "genres": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "\\S"
+          }
+        },
+        "moods": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "\\S"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "\\S"
+          }
+        },
+        "difficulty": {
+          "enum": ["beginner", "intermediate", "advanced"]
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "tip": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600,
+      "pattern": "\\S"
+    }
+  }
+}
