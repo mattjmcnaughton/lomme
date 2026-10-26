@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "name": "Soft landing",
+  "description": "A sparse G minor ii–V–i. Two bars to settle into the resolution.",
+  "chords": ["Am7b5", "D7", "Gm6", "Gm6"],
+  "key": 7,
+  "minor": true,
+  "bpm": 90,
+  "drumPattern": "jazz-light",
+  "bassMotion": "roots",
+  "mode": "solo",
+  "mix": {
+    "drums": { "volume": 60, "muted": false },
+    "bass": { "volume": 75, "muted": false },
+    "keys": { "volume": 42, "muted": false }
+  },
+  "tip": "Play C over Am7b5, hold C over D7, then resolve to B♭ on Gm6. Leave the fourth bar empty and listen to the band."
+}
