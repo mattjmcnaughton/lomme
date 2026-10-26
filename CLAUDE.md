@@ -36,8 +36,11 @@ src/
   routes/                     # Tanstack Router file-based routes
     __root.tsx                # Root layout
     index.tsx                 # Home page
-  components/                 # React components
-  hooks/                      # Custom React hooks
+  domain/                     # Pure music, presets, portable validation and types
+  practice/                   # Session/save behavior, playback hook and UI
+    components/               # Library/chart/band/fretboard/transport
+  audio/                      # Playback interface and Tone.js adapter
+  storage/                    # Local library and session recovery
   lib/                        # Utilities and configuration
     api.ts                    # API client utilities
 tests/
@@ -50,13 +53,16 @@ tests/
 
 - Source code lives in `src/`.
 - Uses Tanstack Router for routing (file-based route generation).
-- Uses Tanstack Query for server state management.
+- Tanstack Query is available from the template; practice has no server state.
 - Unit tests are co-located next to source files (`*.test.tsx`).
 - Integration tests go in `tests/integration/`, e2e tests in `tests/e2e/`.
 - Use `external` in test names for tests that hit external services.
 - Run locally with `pnpm vite` or `just dev`.
 - Node 22 and pnpm 10.33.0 are pinned; commit `pnpm-lock.yaml` changes.
-- This is a frontend-only scaffold; the prototype has not been migrated yet.
+- Practice is frontend-only; see CONTEXT.md for vocabulary and architecture docs
+  for session/library identity and portable compatibility contracts.
+- `pnpm track:assets` generates public schema/prompt/example from the domain;
+  `pnpm track:check <file>` validates portable content.
 - Use Conventional Commits: `feat`/`fix`/`perf` publish releases and deploy after
   successful main CI. Other types do not release. See `docs/deploy.md`.
 - `just compose-smoke` verifies the production Caddy image with Docker.

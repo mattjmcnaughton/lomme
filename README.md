@@ -2,9 +2,16 @@
 
 A programmable practice band for improvising and comping
 
-This repository currently contains the deployment-ready frontend scaffold, not
-the migrated practice-band prototype. It is frontend-only: no API, database,
-authentication service, or application secrets are required.
+Loome is a frontend-only practice instrument: 100 presets, editable and split-chord
+charts, synthesized drums/bass/keys, transposition, mix and practice modes, a
+fretboard, and a personal library. No API, database, authentication service, or
+application secrets are required.
+
+Practice edits stay in the session until **Save to library**. Save updates a
+personal arrangement; **Save a copy** creates another. **Export track** downloads
+a complete `.pocket.json` file; **Load track** validates and adds an independent
+personal arrangement. Browser recovery is not a backup—export work you want to
+keep. Bring your own AI uses a downloadable prompt, not an internal AI service.
 
 Generated with Copier from `mattjmcnaughton/templates/templates/frontend-react`
 at revision `72a28b9be899c6ccd39f06f8482d55e460556acd`, with optional libraries off.
@@ -85,9 +92,10 @@ docker run -p 8080:8080 loome
 just compose-smoke
 ```
 
-The browser smoke runs against a production Vite build. Unit/integration suites
-are intentionally empty until application behavior is migrated; their commands
-report that explicitly instead of requiring placeholder tests.
+Chromium workflows run against a production Vite build. Co-located tests cover
+musical rules, portable compatibility, stable saved identity, real local storage,
+and playback lifecycle using behavioral fakes. `pnpm track:check <file>` validates
+a track independently of the UI; `pnpm track:assets` regenerates public assets.
 
 ## Architecture
 

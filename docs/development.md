@@ -54,13 +54,22 @@ Tests are organized by type:
 - `tests/e2e/` -- Playwright, end-to-end browser tests
 
 Install Chromium once with `pnpm exec playwright install --with-deps chromium`.
-The browser smoke uses the production build. Unit and integration suites are
-empty until the prototype is migrated; commands explicitly allow empty suites.
+The browser workflows use the production build. Co-located tests cover pure
+musical rules, application behavior with stateful fakes, and real browser-storage
+adapters. The separate integration directory currently has no additional tests.
+Use red-green TDD for new contracts and regressions; assert observable outcomes,
+not mocked call counts. Test Web Audio and browser persistence in Chromium when
+their platform behavior matters; fakes cannot establish those guarantees.
 `just compose-smoke` requires a running Docker daemon and verifies Caddy's
 health route, static assets, SPA fallback, and missing-asset 404 behavior.
 
-In Amp orbs, `amp orb services ensure` starts the supervised Vite preview and
+In Amp orbs, `amp orb services ensure` starts the supervised Vite dev server and
 prints its portal URL. The preview is not a production deployment.
+
+`pnpm dev` and `pnpm build` generate the schema, example and external-AI prompt
+from the domain contract. Run `pnpm track:assets` after modifying that contract
+and commit its public outputs. Validate individual files with
+`pnpm track:check path/to/track.pocket.json`.
 
 Use `external` in test names for tests that hit external services. These run via `just test-external`.
 
