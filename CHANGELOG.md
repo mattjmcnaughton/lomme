@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/mattjmcnaughton/lomme/compare/v1.0.0...v1.0.1) (2026-10-27)
+
+
+### Bug Fixes
+
+* correct Lomme branding and deployment naming ([4043c6d](https://github.com/mattjmcnaughton/lomme/commit/4043c6d39f39007cf4f9db1c8ffbdbd5cb65cfd9))
+
 # 1.0.0 (2026-10-26)
 
 
