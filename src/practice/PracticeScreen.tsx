@@ -100,7 +100,7 @@ export default function PracticeScreen() {
     } catch (error) {
       setMessage(
         error instanceof SyntaxError
-          ? "That file isn’t valid JSON. Choose a Loome track file."
+          ? "That file isn’t valid JSON. Choose a Lomme track file."
           : errorText(error),
       );
     }
@@ -112,7 +112,7 @@ export default function PracticeScreen() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${settings.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "loome"}.pocket.json`;
+    link.download = `${settings.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "lomme"}.pocket.json`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -128,11 +128,11 @@ export default function PracticeScreen() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <a className="brand" href={import.meta.env.BASE_URL} aria-label="Loome home">
+        <a className="brand" href={import.meta.env.BASE_URL} aria-label="Lomme home">
           <span className="brand-mark">
             <span />
           </span>
-          loome<span className="brand-dot">.</span>
+          lomme<span className="brand-dot">.</span>
         </a>
         <span className="tagline">A little band. A lot of possibility.</span>
         <div className="header-right">
@@ -142,7 +142,7 @@ export default function PracticeScreen() {
           <button
             type="button"
             className="icon-button"
-            aria-label="How to use Loome"
+            aria-label="How to use Lomme"
             onClick={() => setDialog("help")}
           >
             <HelpCircle size={19} />
@@ -242,7 +242,7 @@ export default function PracticeScreen() {
             type="file"
             accept=".json,application/json"
             hidden
-            aria-label="Loome track file"
+            aria-label="Lomme track file"
             onChange={loadTrack}
           />
           <Chart

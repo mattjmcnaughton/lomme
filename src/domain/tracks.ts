@@ -28,9 +28,9 @@ const channel = {
 // The importer, downloadable schema, and external-AI prompt share this contract.
 export const TRACK_SCHEMA = {
   $schema: "http://json-schema.org/draft-07/schema#",
-  title: "Loome backing track v2",
+  title: "Lomme backing track v2",
   description:
-    "A complete looping 4/4 arrangement for Loome's synthesized band. Data only; no audio or code.",
+    "A complete looping 4/4 arrangement for Lomme's synthesized band. Data only; no audio or code.",
   type: "object",
   additionalProperties: false,
   required: [
@@ -216,7 +216,7 @@ export function validateTrack(track: unknown): Arrangement {
     (track.version !== 1 && track.version !== TRACK_VERSION)
   )
     throw new Error(
-      "Use a Loome track file with version 1 or 2. Future versions aren't supported yet.",
+      "Use a Lomme track file with version 1 or 2. Future versions aren't supported yet.",
     );
   const check = track.version === 1 ? checkV1 : checkV2;
   if (!check(track)) {
@@ -281,11 +281,11 @@ export const EXAMPLE_TRACK: TrackDocument = {
 };
 
 export function createTrackPrompt() {
-  return `Create a Loome backing track for my guitar practice.
+  return `Create a Lomme backing track for my guitar practice.
 
 MY REQUEST (replace this paragraph): A spacious 16-bar soul loop in E major, 84 BPM, laid-back drums, root bass, quiet offbeat keyboard chords, and a turnaround that loops naturally. Leave room for my guitar.
 
-Return exactly one complete JSON object that conforms to the v2 schema below. No Markdown fences, commentary, code, URLs, or extra fields. I will save it as a .pocket.json file and use Load track in Loome. Loome is a static app; you are my external arranger, not an agent inside it. For revisions, I can attach my exported track: preserve all unrequested settings. The .pocket.json extension is retained for compatibility with tracks made before the app was renamed.
+Return exactly one complete JSON object that conforms to the v2 schema below. No Markdown fences, commentary, code, URLs, or extra fields. I will save it as a .pocket.json file and use Load track in Lomme. Lomme is a static app; you are my external arranger, not an agent inside it. For revisions, I can attach my exported track: preserve all unrequested settings. The .pocket.json extension is retained for compatibility with tracks made before the app was renamed.
 
 CAPABILITIES AND ARRANGING RULES
 - 4/4 only, 1–64 bars, integer BPM 45–180. The entire chart repeats indefinitely. No sections, fills, melodies, custom drum lanes, samples, per-bar settings, or audio/MIDI imports.
@@ -303,7 +303,7 @@ CAPABILITIES AND ARRANGING RULES
 EXAMPLE (4 bars, not the 16 bars in my request)
 ${JSON.stringify(EXAMPLE_TRACK, null, 2)}
 
-JSON SCHEMA (the same contract Loome uses to validate imports)
+JSON SCHEMA (the same contract Lomme uses to validate imports)
 ${JSON.stringify(TRACK_SCHEMA, null, 2)}
 `;
 }

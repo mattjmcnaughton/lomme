@@ -1,4 +1,4 @@
-app = 'loome-prod-mattjmcnaughton'
+app = 'lomme-prod-mattjmcnaughton'
 primary_region = 'ewr'
 
 [build]

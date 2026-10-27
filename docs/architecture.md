@@ -1,6 +1,6 @@
 # Architecture
 
-Loome is a frontend-only practice instrument, migrated from the prototype into
+Lomme is a frontend-only practice instrument, migrated from the prototype into
 the React/TypeScript template. Read [the constitution](../CONSTITUTION.md) for
 invariants and [the glossary](../CONTEXT.md) for musical/product language.
 

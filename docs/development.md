@@ -77,8 +77,8 @@ Use `external` in test names for tests that hit external services. These run via
 
 ```sh
 # Build image
-docker build -t loome .
+docker build -t lomme .
 
 # Run container
-docker run -p 8080:8080 loome
+docker run -p 8080:8080 lomme
 ```

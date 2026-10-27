@@ -1,6 +1,6 @@
 # Practice room
 
-Loome supplies a small synthesized band for repeating and exploring musical
+Lomme supplies a small synthesized band for repeating and exploring musical
 changes while a person practices.
 
 ## Language

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-image="loome-smoke:${GITHUB_SHA:-local}"
+image="lomme-smoke:${GITHUB_SHA:-local}"
 container=""
 cleanup() {
   if [ -n "$container" ]; then

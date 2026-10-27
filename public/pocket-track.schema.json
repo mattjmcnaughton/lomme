@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Loome backing track v2",
-  "description": "A complete looping 4/4 arrangement for Loome's synthesized band. Data only; no audio or code.",
+  "title": "Lomme backing track v2",
+  "description": "A complete looping 4/4 arrangement for Lomme's synthesized band. Data only; no audio or code.",
   "type": "object",
   "additionalProperties": false,
   "required": [

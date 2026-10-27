@@ -250,11 +250,11 @@ export function PromptDialog({ onClose }: { onClose: () => void }) {
       <span className="modal-icon">
         <MessageSquareText size={24} />
       </span>
-      <span className="format-badge">LOOME TRACK · V2</span>
+      <span className="format-badge">LOMME TRACK · V2</span>
       <h2 id="prompt-title">Your AI. Your rhythm section.</h2>
       <p>
-        Describe the track to an AI you already use. This prompt gives it Loome’s exact musical
-        vocabulary and file format. No AI runs inside Loome.
+        Describe the track to an AI you already use. This prompt gives it Lomme’s exact musical
+        vocabulary and file format. No AI runs inside Lomme.
       </p>
       <ol className="prompt-steps">
         <li>
@@ -266,7 +266,7 @@ export function PromptDialog({ onClose }: { onClose: () => void }) {
           not an audio file.
         </li>
         <li>
-          <strong>Load track. Play.</strong> Loome validates the file before changing your band.
+          <strong>Load track. Play.</strong> Lomme validates the file before changing your band.
           Export it to ask for a refinement.
         </li>
       </ol>
@@ -291,7 +291,7 @@ export function PromptDialog({ onClose }: { onClose: () => void }) {
         <Copy size={16} /> Copy prompt
       </button>
       <p className="copy-status" aria-live="polite" aria-atomic="true">
-        {status || "Nothing is sent anywhere by Loome. You choose what to share."}
+        {status || "Nothing is sent anywhere by Lomme. You choose what to share."}
       </p>
       <div className="prompt-downloads">
         {[

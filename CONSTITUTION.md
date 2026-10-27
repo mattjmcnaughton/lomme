@@ -1,4 +1,4 @@
-# Loome Constitution
+# Lomme Constitution
 
 Adopted by the project owner on 2026-10-26 to guide the prototype migration
 with domain-driven design, behavioral fakes, and room for a future backend

@@ -1,8 +1,8 @@
-# loome
+# lomme
 
 A programmable practice band for improvising and comping
 
-Loome is a frontend-only practice instrument: 100 presets, editable and split-chord
+Lomme is a frontend-only practice instrument: 100 presets, editable and split-chord
 charts, synthesized drums/bass/keys, transposition, mix and practice modes, a
 fretboard, and a personal library. No API, database, authentication service, or
 application secrets are required.
@@ -15,7 +15,7 @@ keep. Bring your own AI uses a downloadable prompt, not an internal AI service.
 
 Generated with Copier from `mattjmcnaughton/templates/templates/frontend-react`
 at revision `72a28b9be899c6ccd39f06f8482d55e460556acd`, with optional libraries off.
-The GitHub repository remains named `lomme`; the app and domain use **Loome**.
+The application and GitHub repository are named **Lomme** (`lomme`).
 
 ## Getting Started
 
@@ -70,10 +70,11 @@ just gate
 
 ## Deployment
 
-Target: **https://loome.mattjmcnaughton.com**, served by non-root Caddy on Fly.io
+Target: **https://lomme.mattjmcnaughton.com**, served by non-root Caddy on Fly.io
 in `ewr`, with HTTPS and scale-to-zero. See [the launch runbook](docs/deploy.md)
 for app creation, DNS/TLS, GitHub credentials, verification, and rollback.
-No Fly resources or DNS records have been provisioned by this scaffold.
+Automatic Fly deployment is paused until the GitHub credential is configured
+and the deployment job is explicitly enabled.
 
 Like Aleph, successful main CI triggers semantic-release; qualifying conventional
 commits create a tag and GitHub release, then Fly remotely builds that tag.
@@ -83,10 +84,10 @@ Unlike Aleph, there is no redundant GHCR image mirror or backend release command
 
 ```sh
 # Build Docker image
-docker build -t loome .
+docker build -t lomme .
 
 # Run container
-docker run -p 8080:8080 loome
+docker run -p 8080:8080 lomme
 
 # Verify the actual production image over HTTP
 just compose-smoke

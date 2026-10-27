@@ -6,7 +6,8 @@ test("practice edits, explicit saves, stable rename, copy and reload", async ({ 
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  await expect(page).toHaveTitle("Loome — Your practice band");
+  await expect(page).toHaveTitle("Lomme — Your practice band");
+  await expect(page.getByRole("link", { name: "Lomme home" })).toHaveText("lomme.");
   await expect(page.locator("nav.presets button")).toHaveCount(100);
   await page.getByRole("slider", { name: "Tempo", exact: true }).fill("103");
   await expect.poll(() => page.evaluate(() => localStorage.getItem("lomme-library"))).toBeNull();

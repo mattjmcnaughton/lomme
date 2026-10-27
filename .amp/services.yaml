@@ -4,4 +4,4 @@ services:
     port: 5173
     health: /
     portal:
-      title: Loome development
+      title: Lomme development

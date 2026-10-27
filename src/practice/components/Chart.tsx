@@ -62,7 +62,7 @@ export function Chart({
             type="button"
             className="text-button"
             onClick={onPrompt}
-            title="Copy an arranging prompt for your own AI; no model calls inside Loome"
+            title="Copy an arranging prompt for your own AI; no model calls inside Lomme"
           >
             <MessageSquareText size={13} /> Bring your own AI
           </button>

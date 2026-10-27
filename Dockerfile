@@ -17,7 +17,7 @@ RUN pnpm build
 ## Stage 3: Production
 FROM caddy:alpine AS production
 
-LABEL org.opencontainers.image.title="loome"
+LABEL org.opencontainers.image.title="lomme"
 LABEL org.opencontainers.image.description="A programmable practice band for improvising and comping"
 
 RUN addgroup -g 1000 app && adduser -u 1000 -G app -D app
