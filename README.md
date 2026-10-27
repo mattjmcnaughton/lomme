@@ -73,8 +73,7 @@ just gate
 Target: **https://lomme.mattjmcnaughton.com**, served by non-root Caddy on Fly.io
 in `ewr`, with HTTPS and scale-to-zero. See [the launch runbook](docs/deploy.md)
 for app creation, DNS/TLS, GitHub credentials, verification, and rollback.
-Automatic Fly deployment is paused until the GitHub credential is configured
-and the deployment job is explicitly enabled.
+Automatic Fly deployment uses the app-scoped GitHub Actions secret `FLY_API_TOKEN`.
 
 Like Aleph, successful main CI triggers semantic-release; qualifying conventional
 commits create a tag and GitHub release, then Fly remotely builds that tag.

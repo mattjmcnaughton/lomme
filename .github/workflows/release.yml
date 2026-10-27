@@ -76,8 +76,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: release
-    # Paused until Fly credentials and launch authorization are supplied.
-    if: false && needs.release.outputs.published == 'true' && github.event_name == 'workflow_run'
+    # Deploy only newly published releases after successful main push CI.
+    if: needs.release.outputs.published == 'true' && github.event_name == 'workflow_run'
     concurrency: deploy-lomme-prod-mattjmcnaughton
     steps:
       - uses: actions/checkout@v4

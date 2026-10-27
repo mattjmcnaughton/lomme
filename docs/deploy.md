@@ -8,9 +8,9 @@ are public build-time values: never put credentials in them.
 The app name follows Aleph's convention: `lomme-prod-mattjmcnaughton` in `ewr`,
 in the `mattjmcnaughton` organization (Fly CLI slug `personal`). The custom
 domain is `lomme.mattjmcnaughton.com`; GitHub is `mattjmcnaughton/lomme`.
-The Fly deployment job remains explicitly paused (`false && ...` in
-`release.yml`) until the GitHub credential is configured and CD is authorized.
-CI and GitHub releases may still run on main; manual Fly launches are separate.
+Automatic Fly deployment is enabled for newly published releases after successful
+main push CI. It uses the app-scoped GitHub Actions secret `FLY_API_TOKEN`;
+manual Fly launches are separate.
 
 The earlier misspelled Fly app is not automatically deleted or redirected.
 Browser storage belongs to each origin: export personal work from an old origin
@@ -65,12 +65,18 @@ already performed. Authenticate Fly locally before starting.
    revalidated while hashed assets are immutable. The first idle request may
    cold-start the Machine. Future audio capture requires this HTTPS origin.
 
-5. Enable CD only when ready to deploy qualifying merges. Generate an app-scoped
-   deploy token with `flyctl tokens create deploy -a lomme-prod-mattjmcnaughton`,
-   then store it privately as GitHub Actions secret `FLY_API_TOKEN` in
-   `mattjmcnaughton/lomme`. After launch authorization, remove the explicit
-   `false &&` deployment pause from `release.yml` while keeping its existing
-   release/event conditions. Do not paste tokens into chat or source files.
+5. Configure the app-scoped credential for automatic deployment:
+
+   ```sh
+   flyctl tokens create deploy -a lomme-prod-mattjmcnaughton \
+     --name lomme-github-actions --expiry 2160h
+   ```
+
+   Store the entire token privately as GitHub Actions secret `FLY_API_TOKEN` in
+   `mattjmcnaughton/lomme`. This token expires after 90 days. Before expiry,
+   create a replacement, update the secret, verify a deployment, then revoke the
+   old token. Do not use an organization-wide token for CI or paste tokens into
+   chat or source files.
 
 ## Release flow
 
